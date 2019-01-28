@@ -1,28 +1,45 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Server from './Server';
+import Client from './Client';
 
-class App extends Component {
+
+class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <Client
+          id="p1"
+          controls={{
+            'ArrowUp': 'up',
+            'ArrowDown': 'down',
+            'ArrowLeft': 'left',
+            'ArrowRight': 'right'
+          }}
+          ref={c => this.client1 = c} />
+        
+        <Server
+          ref={s => this.server = s} />
+
+        <Client
+          id="p2"
+          controls={{
+            'w': 'up',
+            's': 'down',
+            'a': 'left',
+            'd': 'right'
+          }}
+          ref={c => this.client2 = c} />
       </div>
     );
   }
+
+  componentDidMount() {
+    this.client1.connect(this.server);
+    this.client2.connect(this.server);
+  }
+
 }
+
 
 export default App;
