@@ -16,14 +16,13 @@ class Server extends React.Component{
     this.frame = {
       actionSets: {},
       players: {
-        p1: { x: 10, y: 10, r: 90, color: 'green' },
-        p2: { x: 390, y: 390, r: 360, color: 'cyan' },
-        p3: { x: 10, y: 290, r: 180, color: 'tomato' },
+        p1: { x: 30, y: 30, r: 90, color: 'green' },
+        p2: { x: 370, y: 370, r: 360, color: 'cyan' }
       },
     };
 
     this.updateRate = 30;
-    this.sendRate = 200;
+    this.sendRate = 100;
 
     setInterval(this.update, this.updateRate);
     setInterval(this.send, this.sendRate);

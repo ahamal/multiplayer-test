@@ -10,7 +10,7 @@ class Client extends React.Component {
   constructor(p) {
     super();
     this.id = p.id;
-    this.lag = 200;
+    this.lag = 100;
     this.sendRate = 100;
     this.frameRate = 30;
 

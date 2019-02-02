@@ -6,12 +6,11 @@ var findAngle = (x1, y1, x2, y2) => {
 
 class Engine {
   constructor() {
-    this.clients = ['p1', 'p2', 'p3']
+    this.clients = ['p1', 'p2']
 
     this.p = {
       p1: {},
-      p2: {},
-      p3: {}
+      p2: {}
     }
     this.mouse = {}
   }

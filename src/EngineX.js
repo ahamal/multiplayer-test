@@ -18,8 +18,7 @@ class EngineX {
       'players.p1.r',
       'players.p2.x',
       'players.p2.y',
-      'players.p3.x',
-      'players.p3.y',
+      'players.p2.r',
     ];
 
     this.predictionFields = [
