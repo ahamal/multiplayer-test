@@ -21,7 +21,7 @@ class App extends React.Component {
         <Server
           ref={s => this.server = s} />
 
-        <Client
+        {/* <Client
           id="p2"
           controls={{
             'w': 'up',
@@ -29,14 +29,14 @@ class App extends React.Component {
             'a': 'left',
             'd': 'right'
           }}
-          ref={c => this.client2 = c} />
+          ref={c => this.client2 = c} /> */}
       </div>
     );
   }
 
   componentDidMount() {
     this.client1.connect(this.server);
-    this.client2.connect(this.server);
+    // this.client2.connect(this.server);
   }
 
 }

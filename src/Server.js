@@ -13,7 +13,8 @@ class Server extends React.Component{
     this.subscriptions = {};
     this.actionsBuffer = [];
 
-    this.gameState = {
+    this.frame = {
+      actionSets: {},
       players: {
         p1: { x: 10, y: 10, r: 90, color: 'green' },
         p2: { x: 390, y: 390, r: 360, color: 'cyan' },
@@ -22,7 +23,7 @@ class Server extends React.Component{
     };
 
     this.updateRate = 30;
-    this.sendRate = 30;
+    this.sendRate = 200;
 
     setInterval(this.update, this.updateRate);
     setInterval(this.send, this.sendRate);
@@ -32,28 +33,26 @@ class Server extends React.Component{
     return (
       <div className="server">
         <div>Server</div>
-        <Scene gameState={this.gameState} />
+        <Scene frame={this.frame} />
       </div>
     )
   }
 
   update = () => {
-    var actions = this.actionsBuffer.splice(0, this.actionsBuffer.length);
+    var actionSets = this.actionsBuffer.splice(0, this.actionsBuffer.length);
 
-    var gameState = this.engine.update({
-      gameState: this.gameState,
-      actions: actions,
-      interval: this.updateRate
+    var frame = this.engine.update({
+      frame: this.frame,
+      actionSets: actionSets
     });
-    this.gameFrame += 1;
 
-    this.gameState = gameState;
+    this.frame = frame;
     this.forceUpdate();
   }
 
   send = () => {
     _.each(this.subscriptions, (fn, id) => {
-      fn(this.gameState);
+      fn(this.frame);
     });
   }
 
@@ -62,8 +61,8 @@ class Server extends React.Component{
     this.actionsBuffer.push(data);
   }
 
-  getGameState = (id, fn) => {
-    fn(this.gameState);
+  getFrame = (id, fn) => {
+    fn(this.frame);
   }
 
   subscribe = (id, fn) => {
